@@ -183,7 +183,7 @@ void init(std::string_view window_title)
     }
     else
     {
-        std::cerr << "[opengl_framework] Unable to create an OpenGL debug context\n";
+      //  std::cerr << "[opengl_framework] Unable to create an OpenGL debug context\n";
     }
 #endif
     glfwSetCursorPosCallback(context().window, &mouse_move_callback);
