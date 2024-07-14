@@ -9,7 +9,7 @@ void main()
 {
     vec2 position = in_position;
     position.x = position.x / aspect_ratio;
-    position.x = position.x + position.y*0.10 - 2.;
-    position.x = position.x + time_elapsed * 1.;
+    position.x = position.x + position.y*0.10;
+    position.x = position.x + sin(time_elapsed) * 0.5;
     gl_Position = vec4(position, 0., 1.);
 }
