@@ -34,6 +34,7 @@ int main()
         shader.bind();
         shader.set_uniform("aspect_ratio", gl::framebuffer_aspect_ratio());
         shader.set_uniform("my_uniform_variable", glm::vec2{0.1,1.});
+        shader.set_uniform("time_elapsed", gl::time_in_seconds());
         triangle_mesh.draw();
     }
 }
