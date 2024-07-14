@@ -46,14 +46,18 @@ int main()
     while (gl::window_is_open())
     {
         glm::mat4 const view_matrix = camera.view_matrix();
-        glm::mat4 const projection_matrix = glm::infinitePerspective(45.f /*field of view in radians*/, gl::framebuffer_aspect_ratio() /*aspect ratio*/, 1.001f /*near plane*/);
+        glm::mat4 const projection_matrix = glm::infinitePerspective(45.f /*field of view in radians*/, gl::framebuffer_aspect_ratio() /*aspect ratio*/, 0.001f /*near plane*/);
         glm::mat4 combined_matrix = projection_matrix * view_matrix;
+
+        glm::mat4 ortho_projection_matrix = glm::ortho(-(4.0f / 2.0f), 4.0f / 2.0f, 3.0f / 2.0f, -(3.0f / 2.0f), -1000.0f, 1000.0f);
+        glm::mat4 combined_ortho_matrix = ortho_projection_matrix * view_matrix;
+
         glClearColor(0.2,0.,0.2, 0.1); 
         glClear(GL_COLOR_BUFFER_BIT);
         // Rendu à chaque frame
         shader.bind();
         shader.set_uniform("time_elapsed", gl::time_in_seconds());
-        shader.set_uniform("view_projection_matrix", combined_matrix);
+        shader.set_uniform("view_projection_matrix", combined_ortho_matrix);
         triangle_mesh.draw();     
     }
 }
