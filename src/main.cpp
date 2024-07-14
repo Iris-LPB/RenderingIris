@@ -46,7 +46,7 @@ int main()
     while (gl::window_is_open())
     {
         glm::mat4 const view_matrix = camera.view_matrix();
-        glm::mat4 const projection_matrix = glm::infinitePerspective(45.f /*field of view in radians*/, gl::framebuffer_aspect_ratio() /*aspect ratio*/, 0.001f /*near plane*/);
+        glm::mat4 const projection_matrix = glm::infinitePerspective(90.f /*field of view in radians*/, gl::framebuffer_aspect_ratio() /*aspect ratio*/, 0.001f /*near plane*/);
         glm::mat4 combined_matrix = projection_matrix * view_matrix;
         glClearColor(0.2,0.,0.2, 0.1); 
         glClear(GL_COLOR_BUFFER_BIT);
