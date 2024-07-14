@@ -3,8 +3,14 @@
 int main()
 {
     // Initialisation
+   
     gl::init("TPs de Rendering"); // On crée une fenêtre et on choisit son nom
     gl::maximize_window(); // On peut la maximiser si on veut
+    
+    glEnable(GL_BLEND);
+    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE); // On peut configurer l'équation qui mélange deux couleurs, comme pour faire différents blend mode dans Photoshop. Cette équation-ci donne le blending "normal" entre pixels transparents.
+
+
     auto const triangle_mesh = gl::Mesh{{
         .vertex_buffers = {{
             .layout = {gl::VertexAttribute::Position2D{0}},
@@ -26,15 +32,15 @@ int main()
         .fragment   = gl::ShaderSource::File{"res/fragment.glsl"},
     }};
 
+
     while (gl::window_is_open())
     {
+        glClearColor(0.2,0.,0.2, 0.1); 
+        glClear(GL_COLOR_BUFFER_BIT);
         // Rendu à chaque frame
-        glClearColor(0.2,0.,0.2, 1.); // Choisis la couleur à utiliser. Les paramètres sont R, G, B, A avec des valeurs qui vont de 0 à 1
-        glClear(GL_COLOR_BUFFER_BIT); // Exécute concrètement l'action d'appliquer sur tout l'écran la couleur choisie au-dessus
         shader.bind();
         shader.set_uniform("aspect_ratio", gl::framebuffer_aspect_ratio());
-        shader.set_uniform("my_uniform_variable", glm::vec2{0.1,1.});
         shader.set_uniform("time_elapsed", gl::time_in_seconds());
-        triangle_mesh.draw();
+        triangle_mesh.draw();     
     }
 }
