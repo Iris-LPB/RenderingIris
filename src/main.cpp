@@ -32,6 +32,7 @@ int main()
         glClearColor(0.2,0.,0.2, 1.); // Choisis la couleur à utiliser. Les paramètres sont R, G, B, A avec des valeurs qui vont de 0 à 1
         glClear(GL_COLOR_BUFFER_BIT); // Exécute concrètement l'action d'appliquer sur tout l'écran la couleur choisie au-dessus
         shader.bind();
+        shader.set_uniform("aspect_ratio", gl::framebuffer_aspect_ratio());
         shader.set_uniform("my_uniform_variable", glm::vec2{0.1,1.});
         triangle_mesh.draw();
     }
