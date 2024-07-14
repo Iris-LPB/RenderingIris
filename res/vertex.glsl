@@ -2,15 +2,12 @@
 
 
 layout(location = 0) in vec2 in_position;
-uniform float aspect_ratio;
 uniform float time_elapsed;
+uniform mat4 view_projection_matrix;
 
 void main()
 {
     vec2 position = in_position;
-    position.x = position.x / aspect_ratio;
-    position.x = position.x + position.y*0.10;
-    position.x = position.x + cos(time_elapsed) * 0.45;
-    position.y = position.y + sin(time_elapsed) * 0.45;
-    gl_Position = vec4(position, 0., 1.);
+
+    gl_Position = view_projection_matrix * vec4(in_position, 0., 1.);
 }
